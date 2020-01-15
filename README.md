@@ -1,1 +1,3 @@
 # modsdb-daemon
+
+This repository contains source code and associated utilities needed to convert LCS MapObjectDisk files into SerialDatabaseBinary stores, from which actual correlation functions are extracted. First instances were the pion valence PDF calculations using the "Good Lattice Cross Section" formalism, in which entire Lattice objects were computed and saved for a variety of current insertions and all displacements - rather than individual correlators.
