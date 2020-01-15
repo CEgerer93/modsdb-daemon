@@ -1,0 +1,29 @@
+# ************************
+# THIS WILL BUILD A mod_to_sdb EXECUTABLE, LINKING AGAINST CHROMA, QDP++, & LIBXML2
+# ************************
+
+CXX=g++
+# CXXFLAGS=-Wall -I/home/cegerer/qcd_software/jlab/scalar/install/chroma/include -fopenmp -DUSE_OMP -O3 -std=c++0x -march=core2 -I/home/cegerer/qcd_software/jlab/scalar/install/qdp++/include -I/usr/include/libxml2
+
+# CXXFLAGS=-I/home/cpegerer/qcd_software/cyclops/scalar/install/chroma-scalar/include -fopenmp -DUSE_OMP -O3 -std=c++0x -march=corei7-avx -mtune=corei7-avx -mno-avx -mno-aes -I/home/cpegerer/qcd_software/cyclops/scalar/install/qdp++-scalar/include -I/usr/include/libxml2 -I/shared/gcc-5.3.0/lib64/include
+
+CXXFLAGS=-I/data/cpegerer/scalar_DANGER_NOCHECKSUM/install/chroma-scalar/include -fopenmp -DUSE_OMP -O3 -std=c++0x -march=corei7-avx -mtune=corei7-avx -mno-avx -mno-aes -I/data/cpegerer/scalar_DANGER_NOCHECKSUM/install/qdp++-scalar/include -I/usr/include/libxml2 -I/shared/gcc-5.3.0/lib64/include
+
+
+# LDFLAGS=-L/home/cegerer/qcd_software/jlab/scalar/install/chroma/lib -L/home/cegerer/qcd_software/jlab/scalar/install/qdp++/lib
+
+LDFLAGS=-L/data/cpegerer/scalar_DANGER_NOCHECKSUM/install/chroma-scalar/lib -L/data/cpegerer/scalar_DANGER_NOCHECKSUM/install/qdp++-scalar/lib -L/shared/gcc-5.3.0/lib64/lib
+
+# LIBS=-lchroma -lqdp-lapack -ldslash -lqdp -lXPathReader -lxmlWriter -lqio -llime -lxml2 -lz -lm -ldl -lintrin -lfiledb -lfilehash -llapack -lblas
+
+LDLIBS=-lchroma -lqdp-lapack -ldslash -lqdp -lXPathReader -lxmlWriter -lqio -llime -lxml2 -lz -lm -lfiledb -lfilehash -llapack -lblas -lgmp
+
+
+which_keys_in_mod: which_keys_in_mod.o
+	$(CXX) $(CXXFLAGS) -o which_keys_in_mod which_keys_in_mod.o $(LDFLAGS) $(LDLIBS)
+
+which_keys_in_mod.o: which_keys_in_mod.cc
+	$(CXX) $(CXXFLAGS) -c which_keys_in_mod.cc
+
+clean: 
+	rm -f which_keys_in_mod which_keys_in_mod.o
